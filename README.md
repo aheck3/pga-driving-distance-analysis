@@ -1,4 +1,4 @@
-# pga-driving-distance-analysis
+# Analyzing Driving Distances and The USGA Golf Ball Rollback
 
 This project explores whether longer driving distances on the PGA Tour are strong indicators of success — defined by wins, earnings, and FedEx Cup points. The analysis was conducted using linear regression models on 2024 season data, and it was completed as my final project for the MSBA Data Wrangling course at the University of Notre Dame.
 
