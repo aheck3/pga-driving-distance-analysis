@@ -56,5 +56,5 @@ MSBA, University of Notre Dame
 
 ## View the Report
 
-You can also view my HTML report directly here:  
-[https://aheck3.github.io/pga-driving-distance-analysis/](https://aheck3.github.io/pga-driving-distance-analysis/)  
+You can view the full HTML report here:  
+[https://aheck3.github.io/pga-driving-distance-analysis/driving-distance-report.html](https://aheck3.github.io/pga-driving-distance-analysis/driving-distance-report.html)
