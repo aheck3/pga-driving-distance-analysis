@@ -1,0 +1,280 @@
+---
+title: "The USGA Ball Rollback - An Analysis of Driving Distance on the PGA Tour"
+author: "Alex Heck"
+format:
+  html:
+    toc: true
+    toc-location: left
+    self-contained: true
+---
+
+## Introduction
+
+When first hearing about this project, I was very excited to learn that we were allowed
+to select a topic / data set of our choice. I have played competitive golf for as long as
+I can remember, and I am extremely passionate about the sport. Golf does involve numbers and data, 
+and for the past 4 years, while playing collegiate golf, my coach required that I keep stats on each round that I played. These stats could be analyzed and used to help develop a training
+plan / practice routine.
+
+Golf is a great sport because unlike basketball or football where there is a standard "build," 
+height or weight, typically required to be successful, golf is inclusive and people of all sizes have
+found ways to be successful in the sport. 
+Take me as an example. *I am 5 foot 6 inches tall, and have weighed*
+*130 pounds since my sophomore year of high school*. Last year I was able to individually 
+win a college event playing against guys who were over 6 ft and weighted at least 50lbs more than me.
+
+My motivation for this project is very clear. Back in Winter of 2023, the **USGA** 
+*(United States Golf Association)* announced a golf ball "rollback." For clarity, the **USGA**
+serves as the main governing body for the sport and oversees rules/regulations for amateur 
+and professional golf. This golf ball rollback meant that golf ball manufacturers would be 
+required to change their manufacturing process to ensure that the ball would not travel as far.
+
+Additional motivation for this project came from my personal experience with the game of golf. 
+Through college golf, I was known as a short hitter. My average drives carried 250 yards and 
+would roll out to about 265 yards. Though I was not long off the tee, I was one of the most accurate driver of the golf ball in
+Division 2 college golf hitting 80% of my fairways. I found ways to be successful through my short game (putting and chipping) even though
+I did not hit the ball nearly as far as my competitors. 
+
+Several professional golfers have taken an extreme approach to transform their bodies
+so that they could gain yardage off the tee. Look at this years US Open Champion,
+Bryson Dechambeau who is one of the longest hitters in competitive golf. Additionally players like
+Rory Mcilroy and Tiger Woods have always put an emphasis on getting strong in the gym
+so that they could drive the ball far distances. Does this extra yardage off the tee give players an upperhand?
+Can this extra yardage really be linked to success?
+
+
+### Primary Questions
+
+
+My primary question I am looking to answer in this assignment:
+
+**Is the USGA justified in their golf ball rollback rule change?** 
+
+I will explore this question by looking at the relationship of 
+*Average Driving Distance* (independent variable) to a variety of success indicators which
+will serve as the (dependent variables) such as
+*Wins*, *Money Earnings* and *FedEx Cup Points* (FedEx Cup Points serve as a year long
+ranking system for the PGA Tour and its Tour playoffs)
+
+
+I should note, the golf ball rollback will affect players differently based on how far they
+already hit the golf ball. It is expected that the rollback will affect driving distance by 5%.
+
+For example:
+
+*A player who hits the ball 310 yards, will lose 15.5 yards making their new average 294.5 yards.*
+
+*A player like me who hits the ball 250 yards will lose 12.5 yards making a new average of 237.5.*
+
+A longer hitter will be slightly more effected by the rollback than a shorter hitter.
+
+I expected to find that there will be no correlation or relationship for which 
+driving distance could be used to predict any of the success factors (money, points, wins).
+
+My null hypothesis, H0 is that Average driving distance on tour does not have a relationship/correlation to 
+how many wins a player has, how many FedEx cup points they earn, or how much money they earn. 
+
+The alternative hypothesis Ha would be the opposite that Average Driving Distance can be used as a 
+predictor for success on how many wins a player will have, how many points they will earn, or how much money they will earn. 
+
+
+
+
+
+## Data
+
+The data that I am using for this project can be accessed from
+[pgatour.com](https://www.pgatour.com/stats/off-tee) 
+This data looks at driving distances, I combined it in excel with the money/finishes 
+which was data also on the PGA website!
+
+
+This loads the data in from my working directory
+
+```{r}
+pga <- read.csv("C:/Users/golfe/Downloads/pga1.csv")
+```
+
+This data has 11 variables with 168 rows of observations. 
+This data looks at the 2024 PGA season from 168 of the most successful players.
+
+
+I was very happy with the way that this data came in. The PGA did a great job normalizing all their
+measurements to be in yards, and there were no labels attached to any of the numeric values.
+I found this data to essentially be "ready to use" once it was loaded into R. 
+
+
+The first relationship I wanted to look at was the relationship that 
+Average Driving Distance had on FedEx cup points. Recall that FedEx cup is simply
+the ranking system that the PGA tour uses to award players points for their respective
+finishes in events played. Higher Finishes =  More points awarded, simple as that.
+I used a linear regression model to look into this. This required me to use the lm()
+function.
+
+
+
+```{r}
+
+Regression1 <- lm(Points ~ AvgDistance, data = pga)
+
+summary (Regression1)
+
+
+```
+P value is around 2.7%, could be deemed significant however I am more interested in the R - Squared value 
+which is extremely low. **The R-Squared in this case is 0.02889** I can conclude that average driving distance is not a good 
+predictor of points earned in the FedExCup Season. Essentially, the strength of this relationship is not strong at all, or none at all.
+
+```{r}
+
+library(ggplot2)
+ggplot(pga, aes(AvgDistance, Points)) + 
+          geom_point() +
+          geom_smooth(method = lm) +
+          theme_minimal()
+
+
+```
+
+
+
+
+The next relationship I want to analyze is the relationship between Average
+Driving Distance and Wins. Essentially, can we use average driving distance to predict
+the number of wins that a player will have.
+
+
+
+```{r}
+
+Regression2 <- lm(Wins ~ AvgDistance, data = pga)
+
+summary (Regression2)
+
+
+```
+Looking at the p-value it is quite low which which may mean we do see some statistical significance. It is 1.7% which
+in stats class our typical alpha is 1% so this would still not really meet the requirement.
+
+However looking again at the R-Squared, *the R-Squared for this linear regression is 0.033411* This tells us that the relationship between 
+driving distance and wins is pretty much non-existent. I can conclude that, particularly for the 2024 season, driving distance did not 
+dictate who won the most. 
+
+```{r}
+
+library(ggplot2)
+ggplot(pga, aes(AvgDistance, Wins)) + 
+          geom_point() +
+          geom_smooth(method = lm) +
+          theme_minimal()
+
+```
+
+
+
+Next I want to look at the relationship between driving distance and total money earned.
+Essentially, does driving distance contribute to how much money a PGA Tour player made?
+
+
+```{r}
+
+Regression3 <- lm(MoneyEarned ~ AvgDistance, data = pga)
+
+summary (Regression3)
+
+
+```
+For my third and final regression that I chose to run, I see a p-value of 0.0190 which is not too bad, however again
+the R-squared is just extremely low. 
+*From all three of these regressions there just was not a whole lot there to work with in terms of a strong relationship.* 
+This R-Squared showed to be 0.03267. Again, similar to the previous 2 regressions, average driving distance and money earned 
+did not have a strong relationship. Driving distance alone should not be used as a factor to predict the money that is earned on tour.
+
+
+
+```{r}
+
+library(ggplot2)
+ggplot(pga, aes(AvgDistance, MoneyEarned)) + 
+          geom_point() +
+          geom_smooth(method = lm) +
+          theme_minimal()
+
+
+```
+
+
+
+
+
+## Methods
+
+The primary method by which I chose to analyze and answer my questions was through simple linear 
+regression analysis. Since my independent variable of average distance was not changing from
+test to test, I was changing the dependent variable based on the various success indicators.
+To select success indicators, I contemplated what factors players typically gauge success/failure on. 
+FedEx Cup Points, Wins, and Money Earned are all factors by which professional golfers
+can gauge how well they performed over the course of a season. 
+
+For professional golfers, golf is obviously their job, so Money Earned is a very important
+variable and is inventively one that can be used to measure success. 
+
+Though I did not find much in terms of relationship/predictability..I think a future analysis would be really interesting
+that works to look at combining other factors with avg distance. This would turn into a multiple linear regression. Based on
+my knowledge of golf, I believe that I could build a strong model to predict success. 
+Looking at average driving distance with driving accuracy would likely serve as a stronger predictor since a player who can drive it
+far and straight will be more successful than a player who drives it far but into trouble.
+
+Additionally another success factor to consider would be "cuts-made." On the PGA, golfers play 4 rounds, however after 2 rounds, the field is cut
+to the top 60 players. If you do not play well enough to be in the top 60, you do not get paid. Simply put, if you don't make cuts you do not make money for your play that week. 
+
+
+
+## Results
+
+As illustrated above with my three simple regressions that I ran, there was not a strong relationship between the variable
+of average driving distance and the various success indicators that I used. This means that when trying to predict a players
+success on the PGA tour, you should not use average driving distance as the main factor. This is clear when looking at the R-Square, in each of the respective tests, the R-Square is less than  0.033. Perhaps, Average Driving Distance paired
+up with other factors such as driving accuracy, or a strokes gained statistic for strokes gained off the tee could serve as a stronger
+model to predict success. 
+
+The ggplot graphs that I ran to visually illustrate the relationship confirm my findings that there is not much of a positive correlation
+at all between driving distance and these success factors. Trying to predict how many times a player will win, how much money they will earn,
+or how many points they will receive can simply not be done so successfully by looking at average driving distance alone. 
+
+
+
+## Discussion
+
+Recall that my null hypothesis was:
+*H0 - Average driving distance on tour does not have a relationship/correlation to 
+how many wins a player has, how many points they earn, or how much money they earn*
+
+I formulated this hypothesis based on my own personal experience with the sport, and from the 16 years that I have watched and
+spectated professional golf. The longest hitter does not always win. Golf is a very complex sport with several aspects that must be sharp
+for a player to be able to win. 
+
+When considering why these tests even matter, or why knowing that driving distance is not a good predictor of success, I will pull back to 
+one of my initial motivations for this project. That motivation was the USGA and their decision in late 2023 to roll the golf ball back. 
+The USGA is upset that players continue to hit the golf ball further. Players are innovating ways to become stronger and perfect bio mechanics within the golf swing. As far as equipment, the science that is going into golf club manufacturers and new driver head technology being crafted each year is improving. Off center hits still travel far, and spin rates continue to be reduced. 
+
+The USGA as the governing body of golf took it upon themselves to incorporate new rules regarding the golf ball that will reduce its
+travel distance by around 5%. 
+
+They are wrong for doing this, and are hurting the growth of the game by discouraging long driving distances. 
+
+As seen in my linear models for 2024 PGA Tour Data, just because a player hits the ball far does not mean they are the most successful.
+
+This was made even more clear by Scottie Scheffler who had a record breaking season, winning 7 times and the FedEx cup playoffs. He ranked a meer 61st on the overall average driving distance ranking for PGA tour players.
+
+I believe that this rule change that is put in place by the USGA hurts the growth of the game. Golf fans, and especially kids who are new to the game gravitate towards wanting to hit the driver far. They want to see Professionals who bomb drives over 300 yards! This gets them excited about the game and thus encourages them to start playing. 
+By nerfing the golf ball, the USGA is in essence stunting one of the factors that gets people excited about golf. 
+
+These findings are beneficial because they suggest that the USGA is making this rule change out of their own opinion surrounding the game. This rule change will not help to even out the playing field in terms of player success, because as illustrated driving distance alone has little to do with player success! 
+
+
+
+
+
+
+
