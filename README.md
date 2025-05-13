@@ -28,9 +28,14 @@ I used simple linear regression models to examine the relationship between drivi
 ## Results
 
 Across all three models, the R-squared values were extremely low:
-- Driving Distance vs. FedEx Cup Points: **0.028**
-- Driving Distance vs. Wins: **0.033**
-- Driving Distance vs. Money Earned: **0.032**
+- Driving Distance vs. FedEx Cup Points: **0.028**  
+  ![Distance vs Points](images/distance-vs-points.png)
+
+- Driving Distance vs. Wins: **0.033**  
+  ![Distance vs Wins](images/distance-vs-wins.png)
+
+- Driving Distance vs. Money Earned: **0.032**  
+  ![Distance vs Money Earned](images/distance-vs-earnings.png)
 
 Despite low p-values indicating weak statistical significance, the low R-squared values suggest that driving distance alone is not a reliable predictor of player success on tour.
 
