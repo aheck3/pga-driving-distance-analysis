@@ -2,6 +2,12 @@
 
 This project explores whether longer driving distances on the PGA Tour are strong indicators of success — defined by wins, earnings, and FedEx Cup points. The analysis was conducted using linear regression models on 2024 season data, and it was completed as my final project for the MSBA Data Wrangling course at the University of Notre Dame.
 
+## View the Report
+
+You can view the full HTML report here:  
+[PGA Driving Distance & USGA's Golf Ball Rollback Report](https://aheck3.github.io/pga-driving-distance-analysis/driving-distance-report.html)
+
+
 ## Background
 
 In late 2023, the USGA announced a planned rollback of golf ball distance, aiming to reduce how far golf balls travel by approximately 5% starting in 2028. The decision was based on growing concerns over distance gains in professional golf and the long-term implications for course design and sustainability.
@@ -58,8 +64,3 @@ As a fan and a player, I worry that the USGA’s rollback may unintentionally hu
 Alex Heck  
 MSBA, University of Notre Dame  
 [GitHub Profile](https://github.com/aheck3)
-
-## View the Report
-
-You can view the full HTML report here:  
-[https://aheck3.github.io/pga-driving-distance-analysis/driving-distance-report.html](https://aheck3.github.io/pga-driving-distance-analysis/driving-distance-report.html)
