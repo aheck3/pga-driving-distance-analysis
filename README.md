@@ -5,7 +5,7 @@ This project explores whether longer driving distances on the PGA Tour are stron
 ## View the Report
 
 You can view the full HTML report here:  
-[PGA Driving Distance & USGA's Golf Ball Rollback Report](https://aheck3.github.io/pga-driving-distance-analysis/driving-distance-report.html)
+📄 [PGA Driving Distance & USGA's Golf Ball Rollback Report](https://aheck3.github.io/pga-driving-distance-analysis/driving-distance-report.html)
 
 
 ## Background
